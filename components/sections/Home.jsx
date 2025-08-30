@@ -181,6 +181,63 @@ export default function Home() {
         </motion.div>
       </Section>
 
+            {/* TEAM SECTION */}
+            <Section id="team">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 text-center">
+            Meet the Team
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center text-slate-600">
+            Our team brings together scientists, engineers, and designers who
+            are passionate about solving complex problems at the intersection of
+            research and technology.
+          </p>
+
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+               {
+                name: "Adil Khan",
+                role: "Founder",
+                img: "/team/adil_d.png",
+              },
+              {
+                name: "Tanusha Singh",
+                role: "Tech Lead",
+                img: "/team/tanusha.png", 
+              },             
+              {
+                name: "Saket",
+                role: "Full-Stack Developer · Integrations",
+                img: "/team/saket.png",
+              }
+            ].map((m, i) => (
+              <Card
+                key={i}
+                className="rounded-2xl border-slate-200 shadow-md transition hover:shadow-xl"
+              >
+                <CardContent className="p-6 flex flex-col items-center text-center">
+                  <img
+                    src={m.img}
+                    alt={m.name}
+                    className="h-24 w-24 rounded-full object-cover shadow-md "
+                  />
+                  <p className="mt-4 text-lg font-semibold text-slate-900">
+                    {m.name}
+                  </p>
+                  <p className="text-sm text-slate-600">{m.role}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </motion.div>
+      </Section>
+
+
       {/* CONTACT SECTION */}
       <ContactSection />
     </>

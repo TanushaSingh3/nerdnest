@@ -52,7 +52,7 @@ import {
               </div>
             </div>
             <div className="relative">
-              <div className="pointer-events-none absolute -inset-6 rounded-3xl bg-gradient-to-br from-sky-100 to-emerald-100 blur-2xl" />
+             {/*<div className="pointer-events-none absolute -inset-6 rounded-3xl bg-gradient-to-br from-sky-100 to-emerald-100 blur-2xl" /> */} 
               <PlagiarismDashboardCard />
             </div>
           </div>
