@@ -18,6 +18,7 @@ export default function RootLayout({ children }) {
 */
 import "./globals.css";
 import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
   title: "NerdNest Solutions",
@@ -29,6 +30,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+        <Analytics />
+
       </body>
     </html>
   );
