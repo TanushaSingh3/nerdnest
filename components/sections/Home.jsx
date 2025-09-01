@@ -181,7 +181,7 @@ export default function Home() {
         </motion.div>
       </Section>
 
-            {/* TEAM SECTION */}
+            {/* TEAM SECTION 
             <Section id="team">
         <motion.div
           variants={fadeUp}
@@ -235,7 +235,7 @@ export default function Home() {
             ))}
           </div>
         </motion.div>
-      </Section>
+      </Section>*/}
 
 
       {/* CONTACT SECTION */}
