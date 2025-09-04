@@ -8,7 +8,8 @@
           }
       },
       "result": "https://nerdnest-peach.vercel.app/results.json",
-      "pdf": "https://nerdnest-peach.vercel.app/report-1756997438085.pdf"
+      "pdf": "https://nerdnest-peach.vercel.app/report-1756997438085.pdf",
+      "completedWebhook": "https://nerdnest-peach.vercel.app/completion.json"
     },
     "customizations": {
       "companyLogo": "https://nerdnest-peach.vercel.app/LOGO.svg",

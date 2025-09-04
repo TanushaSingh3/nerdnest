@@ -1,0 +1,95 @@
+{"scannedDocument": {
+    "scanId": "1756997354535",
+    "totalWords": 5,
+    "totalExcluded": 0,
+    "credits": 0,
+    "expectedCredits": 1,
+    "creationTime": "2025-09-04T14:49:15.523118Z",
+    "metadata": {
+      "filename": "submission.txt"
+    },
+    "enabled": {
+      "plagiarismDetection": true,
+      "aiDetection": false,
+      "explainableAi": false,
+      "writingFeedback": false,
+      "pdfReport": true,
+      "cheatDetection": false,
+      "overview": true,
+      "aiSourceMatch": false
+    },
+    "detectedLanguage": "en"
+  },
+  "results": {
+    "score": {
+      "identicalWords": 1,
+      "minorChangedWords": 0,
+      "relatedMeaningWords": 0,
+      "aggregatedScore": 20
+    },
+    "internet": [
+      {
+        "url": "http://example.com/",
+        "id": "2a1b402420",
+        "title": "Example Domain",
+        "introduction": "Example Domain This domain is for use in illustrative examples in documents. You may use this domain in literature without...",
+        "matchedWords": 1,
+        "identicalWords": 1,
+        "similarWords": 0,
+        "paraphrasedWords": 0,
+        "totalWords": 28,
+        "metadata": {
+          "authors": []
+        },
+        "tags": []
+      }
+    ],
+    "database": [],
+    "batch": [],
+    "repositories": []
+  },
+  "notifications": {
+    "alerts": [
+      {
+        "code": "suspected-ai-text",
+        "title": "Potential AI-Generated Text Detected",
+        "message": "We are unable to verify that the text was written by a human.",
+        "severity": 4,
+        "additionalData": "\n {\"results\": \n[{\"classification\": 2, \n\"probability\": 0.7307997032499992, \n\"matches\": \n[ \n{\"text\": \n{\"chars\": \n{\"starts\": [0], \n\"lengths\": [1453]},\n \"words\": \n{\"starts\": [0], \n\"lengths\": [230]}}}]}], \n\"summary\": \n{\"human\": 0.0, \n\"ai\": 1.0},\n \"modelVersion\": \"v8.0\", \n\"translationProvider\": 0, \n\"explain\": \n{\"patterns\": \n{\"statistics\":\n {\"aiCount\": \n[18.38596534729004, 1.4073526859283447, 2.917997121810913, 3.4344568252563477, 2.4015376567840576, 1.58811354637146, 2.324068546295166, 8.947664260864258, 1.6268479824066162, 3.9767396450042725, 1.3944411277770996, 4.648137092590332, 15.093534469604492, 4.389907360076904, 18.734575271606445, 1.4073526859283447, 3.3957223892211914, 4.196235179901123, 1.6397595405578613, 1.9367238283157349, 3.938005208969116, 9.980583190917969, 7.566134452819824, 85.03508758544922, 5.706879615783691, 428.94140625, 58.77622985839844, 35.015625, 47.52120590209961, 227.6015625],\n \"humanCount\": [1.1367287635803223, 0.3948078751564026, 0.5908869504928589, 0.0794915184378624, 0.0397457592189312, 0.20932766795158386, 0.2808700203895569, 1.5845309495925903, 0.041070617735385895, 0.041070617735385895, 0.45442652702331543, 0.076841801404953, 0.5604152083396912, 0.06226835772395134, 0.6399067044258118, 0.3948078751564026, 0.5352429151535034, 0.3020677864551544, 0.18283049762248993, 0.2676214575767517, 0.049019768834114075, 0.06094349920749664, 0.014573445543646812, 2.1263980865478516, 0.7286722660064697, 8.128008842468262, 5.878292083740234, 3.120574712753296, 7.039435863494873, 40.785186767578125], \n\"proportion\": [16.17445182800293, 3.5646519660949707, 4.938333988189697, 43.205326080322266, 60.4224853515625, 7.586734771728516, 8.274534225463867, 5.646884918212891, 39.610992431640625, 96.82687377929688, 3.068573474884033, 60.48969650268555, 26.932769775390625, 70.49980926513672, 29.277040481567383, 3.5646519660949707, 6.344264507293701, 13.89169979095459, 8.968741416931152, 7.2368035316467285, 80.33503723144531, 163.76780700683594, 519.1726684570312, 39.99020004272461, 7.831888198852539, 52.77324676513672, 9.998862266540527, 11.220890045166016, 6.7507123947143555, 5.580495834350586],\n \"source\": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2]},\n \"text\":\n {\"chars\": \n{\"starts\": \n[17, 72, 114, 164, 217, 287, 347, 388, 441, 509, 555, 585, 651, 688, 718, 745, 784, 951, 1043, 1121, 1164, 1220, 1250, 1272, 1345, 1004, 1168, 1272, 1331, 1413], \"lengths\": [20, 21, 24, 40, 31, 25, 39, 21, 29, 30, 29, 44, 28, 28, 26, 21, 19, 36, 31, 21, 37, 21, 21, 23, 27, 28, 29, 23, 30, 22]},\n \"words\": \n{\"starts\": [3, 10, 17, 27, 37, 47, 58, 64, 74, 85, 92, 97, 105, 112, 115, 119, 126, 153, 169, 179, 184, 191, 195, 200, 211, 162, 185, 200, 210, 223],\n\"lengths\": [3, 4, 5, 8, 5, 4, 6, 4, 4, 5, 5, 5, 6, 3, 4, 4, 4, 7, 4, 3, 5, 3, 5, 4, 4, 6, 3, 4, 4, 4]\n}\n}\n}\n}\n}",
+        "category": 2
+      }
+    ]
+  },
+  "writingFeedback": {
+    "textStatistics": {
+      "sentenceCount": 5,
+      "averageWordLength": 4.7,
+      "averageSentenceLength": 12.8,
+      "readingTimeSeconds": 21,
+      "speakingTimeSeconds": 29.5
+    },
+    "score": {
+      "grammarCorrectionsCount": 1,
+      "grammarCorrectionsScore": 93,
+      "grammarScoreWeight": 1,
+      "mechanicsCorrectionsCount": 1,
+      "mechanicsCorrectionsScore": 93,
+      "mechanicsScoreWeight": 1,
+      "sentenceStructureCorrectionsCount": 1,
+      "sentenceStructureCorrectionsScore": 93,
+      "sentenceStructureScoreWeight": 1,
+      "wordChoiceCorrectionsCount": 0,
+      "wordChoiceCorrectionsScore": 100,
+      "wordChoiceScoreWeight": 1,
+      "overallScore": 94
+    },
+    "readability": {
+      "score": 95,
+      "readabilityLevel": 1,
+      "readabilityLevelText": "5th Grader",
+      "readabilityLevelDescription": "Very easy to read"
+    }
+  },
+  "status": 0,
+  "developerPayload": ""
+}
