@@ -1,0 +1,42 @@
+{
+    "metadata": {
+      "words": 30,
+      "excluded": 2
+    },
+    "html": {
+      "value": "<html><body><h1>Example Domain</h1><p>This domain is established to be used for illustrative examples in documents.</body></html>",
+      "exclude": {
+        "starts": [
+          16
+        ],
+        "lengths": [
+          14
+        ],
+        "reasons": [
+          3
+        ],
+        "groupIds": [
+          1
+        ]
+      }
+    },
+    "text": {
+      "value": "Example Domain This domain is established to be used for illustrative examples in documents.",
+      "exclude": {
+        "starts": [
+          0
+        ],
+        "lengths": [
+          14
+        ],
+        "reasons": [
+          3
+        ]
+      },
+      "pages": {
+        "startPosition": [
+          0
+        ]
+      }
+    }
+  }
