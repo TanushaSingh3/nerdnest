@@ -1,0 +1,24 @@
+{
+    "input": {
+      "requestParams": {
+        "headers": {
+             "Authorization": "DB2A23E30FAD79F2488D528D0A761A751B1949A6FED757459C6B519A549098DF",
+             "header_key2": "header_value1",
+             "header_key3": "header_value2"
+          }
+      },
+      "result": "https://nerdnest-peach.vercel.app/results.json",
+      "pdf": "https://nerdnest-peach.vercel.app/report-1756997438085.pdf"
+    },
+    "customizations": {
+      "companyLogo": "https://nerdnest-peach.vercel.app/LOGO.svg",
+      "accessExpired": {
+        "httpResponsesCode": [
+          403,
+          401
+        ],
+        "customMessage": "*Custom Error Message*",
+        "redirectUrl": "https://example.com/login"
+      }
+    }
+  }

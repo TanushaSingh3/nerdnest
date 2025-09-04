@@ -1,0 +1,101 @@
+{
+    "statistics": {
+      "identical": 1,
+      "minorChanges": 0,
+      "relatedMeaning": 0
+    },
+    "text": {
+      "comparison": {
+        "identical": {
+          "source": {
+            "chars": {
+              "starts": [
+                0
+              ],
+              "lengths": [
+                1
+              ]
+            },
+            "words": {
+              "starts": [
+                0
+              ],
+              "lengths": [
+                0
+              ]
+            }
+          },
+          "suspected": {
+            "chars": {
+              "starts": [
+                0
+              ],
+              "lengths": [
+                1
+              ]
+            },
+            "words": {
+              "starts": [
+                0
+              ],
+              "lengths": [
+                0
+              ]
+            }
+          }
+        },
+        "minorChanges": {
+          "source": {
+            "chars": {
+              "starts": [],
+              "lengths": []
+            },
+            "words": {
+              "starts": [],
+              "lengths": []
+            }
+          },
+          "suspected": {
+            "chars": {
+              "starts": [],
+              "lengths": []
+            },
+            "words": {
+              "starts": [],
+              "lengths": []
+            }
+          }
+        },
+        "relatedMeaning": {
+          "source": {
+            "chars": {
+              "starts": [],
+              "lengths": []
+            },
+            "words": {
+              "starts": [],
+              "lengths": []
+            }
+          },
+          "suspected": {
+            "chars": {
+              "starts": [],
+              "lengths": []
+            },
+            "words": {
+              "starts": [],
+              "lengths": []
+            }
+          }
+        }
+      },
+      "value": "\n\n    Example Domain\n\n    This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.\n\n    More information...\n\n\n\n",
+      "pages": {
+        "startPosition": [
+          0
+        ]
+      }
+    },
+    "html": {},
+    "version": 3
+  }
