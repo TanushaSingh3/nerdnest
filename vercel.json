@@ -5,7 +5,7 @@
         "headers": [
           {
             "key": "Access-Control-Allow-Origin",
-            "value": "https://report.sand-box.info, https://yourproductiondomain.com, http://localhost:3000"
+            "value": "*"
           },
           {
             "key": "Access-Control-Allow-Methods",
