@@ -1,0 +1,30 @@
+{
+    "textStatistics": {
+      "sentenceCount": 5,
+      "averageWordLength": 4.7,
+      "averageSentenceLength": 12.8,
+      "readingTimeSeconds": 21,
+      "speakingTimeSeconds": 29.5
+    },
+    "score": {
+      "grammarCorrectionsCount": 1,
+      "grammarCorrectionsScore": 93,
+      "grammarScoreWeight": 1,
+      "mechanicsCorrectionsCount": 1,
+      "mechanicsCorrectionsScore": 93,
+      "mechanicsScoreWeight": 1,
+      "sentenceStructureCorrectionsCount": 1,
+      "sentenceStructureCorrectionsScore": 93,
+      "sentenceStructureScoreWeight": 1,
+      "wordChoiceCorrectionsCount": 0,
+      "wordChoiceCorrectionsScore": 100,
+      "wordChoiceScoreWeight": 1,
+      "overallScore": 94
+    },
+    "readability": {
+      "score": 95,
+      "readabilityLevel": 1,
+      "readabilityLevelText": "5th Grader",
+      "readabilityLevelDescription": "Very easy to read"
+    }
+  }

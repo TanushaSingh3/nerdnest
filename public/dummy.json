@@ -9,7 +9,9 @@
       },
       "result": "https://nerdnest-peach.vercel.app/results.json",
       "pdf": "https://nerdnest-peach.vercel.app/report-1756997438085.pdf",
-      "completedWebhook": "https://nerdnest-peach.vercel.app/completion.json"
+      "completedWebhook": "https://nerdnest-peach.vercel.app/completion.json",
+      "crawledVersion": "https://nerdnest-peach.vercel.app/crawled.json",
+      "writingFeedback": "https://nerdnest-peach.vercel.app/writing.json"
     },
     "customizations": {
       "companyLogo": "https://nerdnest-peach.vercel.app/LOGO.svg",
