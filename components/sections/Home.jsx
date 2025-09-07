@@ -14,7 +14,27 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 // Icons
-import { Mail, ShieldCheck, Send, FileText, Beaker, Cpu, Workflow, Sparkles, Database } from "lucide-react";
+import { 
+  FileText, 
+  Beaker, 
+  Cpu, 
+  Workflow,
+  Pencil, 
+  Wand2, 
+  LayoutTemplate, 
+  BookOpen, 
+  FlaskConical, 
+  Repeat, 
+  Network, 
+  BarChart3, 
+  Code2, 
+  Calendar, 
+  ListChecks, 
+  Settings 
+} from "lucide-react";
+
+import { Mail, ShieldCheck, Send,  Sparkles, Database } from "lucide-react";
+import ServicesCards from "../ServicesCards";
 
 // Animation variants
 const fadeUp = {
@@ -26,7 +46,7 @@ export default function Home() {
   return (
     <>
       {/* HERO SECTION */}
-      <Section id="hero" className="pt-20 md:pt-28">
+      <Section id="hero" className="pt-10 md:pt-10">
         <div className="grid items-center gap-8 md:grid-cols-2">
           <motion.div
             variants={fadeUp}
@@ -68,29 +88,66 @@ export default function Home() {
             className="relative"
           >
             <div className="pointer-events-none absolute -inset-6 rounded-3xl bg-gradient-to-br from-sky-100 to-emerald-100 blur-2xl" />
-            <div className="relative grid gap-4 sm:grid-cols-2">
-              {[
-                { icon: FileText, title: "Research Papers" },
-                { icon: Beaker, title: "Methodology Docs" },
-                { icon: Cpu, title: "Custom Software" },
-                { icon: Workflow, title: "Lab Automation" },
-              ].map(({ icon, title }, i) => {
-                const Icon = icon;
-                return (
-                  <Card
-                    key={i}
-                    className="rounded-2xl border-slate-200 shadow-lg"
-                  >
-                    <CardContent className="flex items-center gap-3 p-6">
-                      <Icon className="h-6 w-6 text-sky-600" />
-                      <p className="text-sm font-semibold text-slate-800">
-                        {title}
-                      </p>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+            
+            <div className="grid gap-4 sm:grid-cols-2">
+  {[
+    { 
+      icon: FileText, 
+      title: "Research Papers",
+      options: ["Drafting", "Editing", "Formatting"] 
+    },
+    { 
+      icon: Beaker, 
+      title: "Methodology Docs",
+      options: ["SOPs", "Lab Protocols", "Reproducibility"] 
+    },
+    { 
+      icon: Cpu, 
+      title: "Custom Software",
+      options: ["APIs", "Dashboards", "Automation Scripts"] 
+    },
+    { 
+      icon: Workflow, 
+      title: "Lab Automation",
+      options: ["Scheduling", "Tracking", "Instrument Integrations"] 
+    },
+  ].map(({ icon, title, options }, i) => {
+    const Icon = icon;
+    return (
+      <Card
+        key={i}
+        className="group relative rounded-2xl border-slate-200 shadow-lg transition hover:shadow-xl hover:border-sky-300 overflow-hidden"
+      >
+        <CardContent className="flex flex-col gap-3 p-6">
+          <div className="flex items-center gap-3">
+            <Icon className="h-6 w-6 text-sky-600" />
+            <p className="text-sm font-semibold text-slate-800">{title}</p>
+          </div>
+
+          {/* Sub-options inside card */}
+          <div className="max-h-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-40">
+            <div className="mt-3 flex flex-col gap-2">
+              {options.map((opt, j) => (
+                <button
+                  key={j}
+                  className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-gradient-to-r hover:from-sky-50 hover:to-emerald-50 hover:text-sky-700 transition"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
+                  {opt}
+                </button>
+              ))}
             </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  })}
+</div>
+
+
+
+
+
           </motion.div>
         </div>
       </Section>
