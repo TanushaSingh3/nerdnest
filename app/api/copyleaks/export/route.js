@@ -15,6 +15,7 @@ export async function POST(request) {
       // Build webhook base URL from env (use uppercase env var in deployment)
       const baseEnv = process.env.COPYLEAKS_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL || "";
       const webhookBase = `${baseEnv.replace(/\/$/, "")}/api/copyleaks/webhook`;
+      
   
       // Normalize result_ids to array (allow single string or array)
       let ids = [];
@@ -31,12 +32,18 @@ export async function POST(request) {
   
       // If you expect at least one results object, keep; otherwise send empty array
       const bodyPayload = {
-        results: resultsArray,
+        //results: resultsArray,
         pdfReport: {
           verb: "POST",
           headers: [["header-key", "header-value"]],
           endpoint: `${webhookBase}/pdf-report/${submission_id}`,
         },
+        overview: {
+          verb: "POST",
+          headers: [["header-key", "header-value"]],
+          endpoint: `${webhookBase}/overview/${submission_id}`,
+        },
+        /*
         aiDetection: {
           verb: "POST",
           headers: [["header-key", "header-value"]],
@@ -51,7 +58,7 @@ export async function POST(request) {
           verb: "POST",
           headers: [["header-key", "header-value"]],
           endpoint: `${webhookBase}/crawled-version/${submission_id}`,
-        },
+        },*/
         completionWebhook: `${webhookBase}/export-completed/${submission_id}`,
         maxRetries: 3,
       };

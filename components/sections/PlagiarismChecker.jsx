@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import AuthButton from "@/components/AuthButton";
 import { useAuth } from "@/lib/AuthContext";
 
-const MAX_CHAR = 150;
+const MAX_CHAR = 2500;
 
 export default function PlagiarismChecker() {
   const { user } = useAuth();
@@ -16,13 +16,6 @@ export default function PlagiarismChecker() {
   const fileInputRef = useRef();
   const router = useRouter();
 
-  // ✅ If logged in, go directly to /my-scans
-//   useEffect(() => {
-//     if (user) {
-//       router.replace("/my-scans");
-//     }
-//   }, [user, router]);
-
   const handleFileChange = (e) => {
     if (e.target.files?.[0]) setFile(e.target.files[0]);
   };
@@ -30,41 +23,83 @@ export default function PlagiarismChecker() {
   const clear = () => {
     setText("");
     setFile(null);
-    fileInputRef.current && (fileInputRef.current.value = "");
+    if (fileInputRef.current) fileInputRef.current.value = "";
     setSubmitted(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    if (!text.trim() && !file) {
+      alert("Please paste some text or upload a file before submitting.");
+      return;
+    }
+  
     setLoading(true);
-
     try {
-      // Simulate API submission
-      
-      const res = await fetch("/api/copyleaks/submit", 
-        { method: "POST", body: JSON.stringify({text}),headers:{'uid':user.uid} });
-      setSubmitted(true);
+      // Build FormData
+      const formData = new FormData();
+      formData.append("text", text || "");
+      if (file) formData.append("file", file);
+  
+      // Prepare headers: don't set Content-Type for FormData.
+      const headers = {};
+      if (user?.uid) headers.uid = user.uid;
+  
+      const response = await fetch("/api/copyleaks/submit", {
+        method: "POST",
+        headers,
+        body: formData,
+      });
+  
+      if (!response.ok) {
+        let msg = "Submission failed. Try again.";
+        try {
+          const err = await response.json();
+          if (err?.error) msg = err.error;
+        } catch (_) {}
+        throw new Error(msg);
+      }
+  
+      // Success:
+      if (user) {
+        router.push("/my-scans");
+      } else {
+        setSubmitted(true);
+      }
     } catch (err) {
-      console.error(err);
-      alert("Something went wrong. Try again.");
+      console.error("submit error:", err);
+      alert(err?.message || "Something went wrong. Try again.");
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="min-h-screen px-6 py-10 bg-gradient-to-b from-sky-400/10 via-emerald-200/10 to-emerald-600/10">
       <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl p-8">
-        {/* Header */}
-        <div className="flex justify-center items-center  mb-6 ">
-          <h1 className="text-3xl font-extrabold text-gray-800">Plagiarism Checker</h1>
+        {/* Header: title left, My Scans button right (only when logged in) */}
+        <div className="flex items-center justify-center mb-6">
+          <h1 className="text-3xl font-extrabold text-gray-800">Write with confidence</h1>
+
+          {/* Show My Scans button when user is logged in 
+          {user && (
+            <button
+              onClick={() => router.push("/my-scans")}
+              className="ml-4 rounded-full px-4 py-2 bg-gradient-to-r from-sky-500 to-emerald-500 text-white font-semibold hover:scale-105 transition-transform"
+              aria-label="Go to My Scans"
+            >
+              My Scans
+            </button>
+          )}*/}
         </div>
 
-        {!submitted && (<p className="text-gray-600 mb-6">
-          Paste up to <strong>{MAX_CHAR} characters</strong> or upload a file.{" "}
-          For longer content, please{" "}
-          <span className="text-emerald-600 font-medium">create an account</span>.
-        </p>)}
+        {!submitted && (
+          <p className="text-gray-600 mb-6">
+            Run your text through our fast plagiarism checker and make sure every word is truly yours.
+          </p>
+        )}
 
         {/* Input form */}
         {!submitted && (
@@ -90,9 +125,7 @@ export default function PlagiarismChecker() {
                   Upload File
                 </span>
               </label>
-              <span
-                className={text.length > MAX_CHAR ? "text-red-500" : "text-gray-500"}
-              >
+              <span className={text.length > MAX_CHAR ? "text-red-500" : "text-gray-500"}>
                 {text.length} / {MAX_CHAR}
               </span>
             </div>
@@ -127,24 +160,26 @@ export default function PlagiarismChecker() {
               >
                 Clear
               </button>
+
+              
             </div>
           </form>
         )}
 
-        {/* Submitted state */}
+        {/* Submitted state (only for unauthenticated users) */}
         {submitted && (
           <div className="mt-10 text-center space-y-4">
             <h2 className="text-2xl font-bold text-gray-800">✅ Scan Submitted!</h2>
-            <p className="text-gray-600">
-              Your content has been successfully submitted. Results will be ready soon.
-            </p>
-            <p className="text-gray-700 font-medium">
-              Please login/signup to view your detailed reports.
-            </p>
-            <AuthButton />
+            <p className="text-gray-600">Your content has been successfully submitted. Results will be ready soon.</p>
+            <p className="text-gray-700 font-medium">Sign up / log in to view detailed reports and keep your scans.</p>
+
+            <div className="flex items-center justify-center gap-3">
+              <AuthButton />
+            </div>
           </div>
         )}
       </div>
     </div>
   );
 }
+

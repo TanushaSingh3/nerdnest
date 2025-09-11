@@ -305,6 +305,7 @@
 // app/api/copyleaks/[webhook_type]/[submission_id]/route.js
 import admin from "@/lib/firebaseAdmin";
 import axios from "axios";
+import crypto from "crypto";
 
 /* ----------------------
    CORS preflight handler
@@ -321,13 +322,12 @@ export async function OPTIONS() {
   });
 }
 
-/* ----------------------
-   POST webhook handler
-   ---------------------- */
+
+    
 export async function POST(req, context) {
   try {
     // Pull path params supplied by App Router
-    const params = context?.params || {};
+    const params = await context.params;
     const webhook_type = params.webhook_type;
     const submission_id = params.submission_id;
 
@@ -348,6 +348,8 @@ export async function POST(req, context) {
       return jsonResponse(400, { error: "invalid webhook type" });
     }
 
+    console.log('Webhhok received********-------------'+webhook_type + ' for submission '+submission_id);
+
     // Clone request so we can consume body both as raw bytes and parsed JSON
     const reqForBuffer = req.clone();
     const reqForJson = req; // will be used if content-type is JSON
@@ -358,6 +360,8 @@ export async function POST(req, context) {
     // Read raw bytes (useful for file storage)
     const arrayBuffer = await reqForBuffer.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
+
+ 
 
     // Try parsing JSON only if content-type looks JSON/text
     let parsedBody = null;
@@ -411,13 +415,20 @@ export async function POST(req, context) {
     // Storage path and save
     const basePath = `submissions/${submission_id}/incoming`;
     const timestamp = Date.now();
-    const filename = `${webhook_type}_${timestamp}${ext}`;
+    const filename = `${webhook_type}`;
     const storagePath = `${basePath}/${filename}`;
     const file = bucket.file(storagePath);
 
+    const cryToken = (typeof crypto.randomUUID === "function")
+  ? crypto.randomUUID()
+  : require("uuid").v4();
+
     // Save the raw payload to storage
     await file.save(buffer, {
-      metadata: { contentType: contentType || "application/octet-stream" },
+      metadata: { contentType: contentType || "application/octet-stream" ,
+        metadata: {
+          firebaseStorageDownloadTokens: cryToken,
+        },},
       resumable: false,
     });
 
@@ -436,7 +447,7 @@ export async function POST(req, context) {
     await webhooksCol.add(webhookDoc);
 
     // If webhook_type indicates completion, call your export API
-    if (webhook_type === "completion" || webhook_type === "export-completed") {
+    if (webhook_type === "completion" ) {
       try {
         console.log("Calling export API (server -> /api/copyleaks/export) for submission:", submission_id);
 
@@ -490,7 +501,7 @@ export async function POST(req, context) {
       const keys = Object.keys(updatedReceived);
       const allReceived = expected.every((t) => keys.includes(t));
       if (allReceived) {
-        tx.update(submissionRef, { status: "ready_to_aggregate" });
+        tx.update(submissionRef, { status: "completed" });
       }
     });
 
