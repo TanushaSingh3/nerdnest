@@ -227,7 +227,7 @@ import { useAuth } from "@/lib/AuthContext";
 import AuthButton from "@/components/AuthButton";
 import { CheckCircle, Clock, ShieldCheck, FileDown, Plus } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import  Badge  from "@/components/ui/badge";
+import Badge from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 export default function HistoryPage() {
@@ -258,81 +258,94 @@ export default function HistoryPage() {
   }, [user]);
 
   return (
-    <div className="min-h-screen px-6 py-10 bg-gradient-to-b from-sky-400/10 via-emerald-200/10 to-emerald-600/10">
-      <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg p-8">
-      <div className="flex justify-between items-center mb-6">
-  <h1 className="text-3xl font-extrabold text-gray-800">📄 My Scans</h1>
-  <a
-    href="/plagiarism-checker"
-    className="px-5 py-2 rounded-full bg-gradient-to-r from-sky-500 to-emerald-500 text-white font-semibold shadow hover:scale-105 transition-transform"
-  >
-    Fresh Scan
-  </a>
-</div>
-
-
+    <div className="min-h-screen px-4 sm:px-6 py-6 sm:py-10 bg-gradient-to-b from-sky-400/10 via-emerald-200/10 to-emerald-600/10">
+      <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-800">
+            📄 My Scans
+          </h1>
+          <a
+            href="/plagiarism-checker"
+            className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2 rounded-full bg-gradient-to-r from-sky-500 to-emerald-500 text-white font-semibold shadow hover:scale-105 transition-transform text-sm sm:text-base"
+          >
+            Fresh Scan
+          </a>
+        </div>
+  
+        {/* Login Prompt */}
         {!user && !loading && (
-          <div className="text-center py-10">
-            <h2 className="text-xl font-bold text-gray-800 mb-3">Login to view your scans</h2>
-            <p className="text-gray-600 mb-6">You need to sign in to access your plagiarism reports.</p>
+          <div className="text-center py-6 sm:py-10">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3">
+              Login to view your scans
+            </h2>
+            <p className="text-sm sm:text-base text-gray-600 mb-6">
+              You need to sign in to access your plagiarism reports.
+            </p>
             <AuthButton />
           </div>
         )}
+      
+  
+  
 
-        {user && loading && <p className="text-gray-600">Loading your scans...</p>}
+  { user && loading && <p className="text-gray-600">Loading your scans...</p> }
 
-        {user && !loading && scans.length > 0 && (
-          <ul className="grid gap-6 sm:grid-cols-1">
-            {scans.map((scan) => (
-              <li
-                key={scan.id}
-                className="bg-gray-50 border rounded-xl shadow hover:shadow-md transition overflow-hidden"
-              >
-                
+  {
+    user && !loading && scans.length > 0 && (
+      <ul className="grid gap-6 sm:grid-cols-1">
+        {scans.map((scan) => (
+          <li
+            key={scan.id}
+            className="bg-gray-50 border rounded-xl shadow hover:shadow-md transition overflow-hidden"
+          >
 
-<div className="p-4 flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
-  <div>
-    <h2 className="font-semibold text-gray-800 mb-1">Scan: {scan.fileName}</h2>
-    <p className="text-sm text-gray-500 mb-1">Plagiarism: {scan.plagiarismScore || "N/A"}</p>
-    <p className="text-sm text-gray-500">AI: {aiScoreShort(scan.aiContentDetection)}</p>
-  </div>
-  <div className="flex items-center gap-2 sm:self-end">
-    {scan.status === "pending" ? (
-      <Clock className="text-yellow-600 w-5 h-5" />
-    ) : (
-      <CheckCircle className="text-green-600 w-5 h-5" />
-    )}
-    <button
-  onClick={() => {
-    if (scan.status === "completed") {
-      setExpanded(expanded === scan.id ? null : scan.id);
-    }
-  }}
-  disabled={scan.status !== "completed"}
-  className={`px-3 py-1 text-sm rounded-full transition-transform
+
+            <div className="p-4 flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
+              <div>
+                <h2 className="font-semibold text-gray-800 mb-1">Scan: {scan.fileName}</h2>
+                <p className="text-sm text-gray-500 mb-1">Plagiarism: {scan.plagiarismScore || "N/A"}</p>
+                <p className="text-sm text-gray-500">AI: {aiScoreShort(scan.aiContentDetection)}</p>
+              </div>
+              <div className="flex items-center gap-2 sm:self-end">
+                {scan.status === "pending" ? (
+                  <Clock className="text-yellow-600 w-5 h-5" />
+                ) : (
+                  <CheckCircle className="text-green-600 w-5 h-5" />
+                )}
+                <button
+                  onClick={() => {
+                    if (scan.status === "completed") {
+                      setExpanded(expanded === scan.id ? null : scan.id);
+                    }
+                  }}
+                  disabled={scan.status !== "completed"}
+                  className={`px-3 py-1 text-sm rounded-full transition-transform
     ${scan.status === "completed"
-      ? "bg-gradient-to-r from-sky-500 to-emerald-500 text-white hover:scale-105"
-      : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
->
-  {expanded === scan.id ? "Hide" : "View More"}
-</button>
+                      ? "bg-gradient-to-r from-sky-500 to-emerald-500 text-white hover:scale-105"
+                      : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
+                >
+                  {expanded === scan.id ? "Hide" : "View More"}
+                </button>
 
-  </div>
-</div>
+              </div>
+            </div>
 
 
-                {expanded === scan.id && <ExpandedCard submission={scan} 
-                />}
-              </li>
-            ))}
-          </ul>
-        )}
+            {expanded === scan.id && <ExpandedCard submission={scan}
+            />}
+          </li>
+        ))}
+      </ul>
+    )
+  }
 
-        {user && !loading && scans.length === 0 && (
-          <p className="text-gray-600">No scans found. Try running a plagiarism check!</p>
-        )}
-      </div>
-    </div>
+  {
+    user && !loading && scans.length === 0 && (
+      <p className="text-gray-600">No scans found. Try running a plagiarism check!</p>
+    )
+  }
+      </div >
+    </div >
   );
 }
 
@@ -355,12 +368,12 @@ function ExpandedCard({ submission }) {
             <p className="text-sm font-semibold text-slate-800">Originality Dashboard</p>
           </div>
           <Button
-                  variant="outline"
-                  className="rounded-full border-slate-200"
-                  onClick={handleDownload}
-                >
-                  <FileDown className="h-4 w-4 mr-1" /> Download PDF
-                </Button>
+            variant="outline"
+            className="rounded-full border-slate-200"
+            onClick={handleDownload}
+          >
+            <FileDown className="h-4 w-4 mr-1" /> Download PDF
+          </Button>
         </div>
 
         {/* Stats grid */}
@@ -402,7 +415,7 @@ function ExpandedCard({ submission }) {
                 {submission.writingAssistant || "No feedback available"}
               </pre>
 
-            
+
             </div>
           </div>
         </div>
