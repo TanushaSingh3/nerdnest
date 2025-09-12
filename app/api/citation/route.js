@@ -45,14 +45,21 @@ function buildMeta(work) {
 }
 
 function classifyInput(input) {
-    if (input.startsWith("10.")) return "doi";          // bare DOI
+    input = input.trim();
+  
+    if (/^10\./.test(input)) return "doi"; // bare DOI
+    if (/^PMC\d+$/i.test(input)) return "pmcid"; // PMCID like PMC123456
+    if (/^\d{4,9}$/.test(input)) return "pmid"; // plain PMID (4–9 digits)
+  
     if (input.startsWith("http")) {
-      if (input.includes("doi.org")) return "doi-url";  // DOI URL
-      if (input.includes("arxiv.org")) return "arxiv";  // ArXiv
-      return "publisher-url";                           // try DOI extract
+      if (input.includes("doi.org")) return "doi-url";
+      if (input.includes("arxiv.org")) return "arxiv";
+      return "publisher-url";
     }
-    return "search"; // keyword fallback
+  
+    return "search"; // fallback keyword
   }
+  
   
 
   function extractDOIFromURL(url) {
@@ -61,6 +68,30 @@ function classifyInput(input) {
     const match = url.match(doiRegex);
     if (match) {
       return match[0];
+    }
+    return null;
+  }
+  
+  async function resolvePMID(pmid) {
+    const res = await fetch(
+      `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=${pmid}&retmode=json`
+    );
+    const data = await res.json();
+    const record = data.result[pmid];
+    if (record && record.articleids) {
+      const doiObj = record.articleids.find((id) => id.idtype === "doi");
+      if (doiObj) return doiObj.value;
+    }
+    return null;
+  }
+  
+  async function resolvePMCID(pmcid) {
+    const res = await fetch(
+      `https://www.ncbi.nlm.nih.gov/pmc/utils/idconv/v1.0/?ids=${pmcid}&format=json`
+    );
+    const data = await res.json();
+    if (data.records && data.records[0] && data.records[0].doi) {
+      return data.records[0].doi;
     }
     return null;
   }
@@ -80,7 +111,26 @@ export async function POST(req) {
     const type = classifyInput(query);
     let work;
 
-    if (type === "doi") {
+    console.log('type)))))))))))))))))))))'+type);
+
+    if (type === "pmid") {
+        const pmid = query.replace(/pmid:/i, "").trim();
+        const doi = await resolvePMID(pmid);
+        if (doi) {
+          const res = await fetch(`https://api.openalex.org/works/https://doi.org/${doi}`);
+          work = await res.json();
+        }
+      } else if (type === "pmcid") {
+        const pmcid = query.trim();
+        const doi = await resolvePMCID(pmcid);
+        if (doi) {
+          const res = await fetch(`https://api.openalex.org/works/https://doi.org/${doi}`);
+          work = await res.json();
+        }
+      }
+      
+
+    else if (type === "doi") {
         const res = await fetch(`https://api.openalex.org/works/https://doi.org/${query}`);
         work = await res.json();
       } else if (type === "doi-url") {
@@ -108,6 +158,7 @@ export async function POST(req) {
         const res = await fetch(`https://api.openalex.org/works?search=${encodeURIComponent(query)}`);
         const data = await res.json();
         work = data.results[0];
+        console.log(JSON.stringify(work,null,2))
       }
   
      

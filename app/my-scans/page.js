@@ -227,7 +227,6 @@ import { useAuth } from "@/lib/AuthContext";
 import AuthButton from "@/components/AuthButton";
 import { CheckCircle, Clock, ShieldCheck, FileDown, Plus } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import Badge from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 export default function HistoryPage() {

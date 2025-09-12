@@ -141,7 +141,7 @@ export default function AIBotWidget() {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      text: "👋 Hi! Paste a DOI, URL, or keyword and I'll generate a citation for you.",
+      text: "👋 Hi! Paste a DOI, PMID, URL, or keyword and I'll generate a citation for you.",
     },
   ]);
   const [input, setInput] = useState("");
@@ -238,7 +238,7 @@ export default function AIBotWidget() {
               {/* Input + Send */}
               <div className="flex items-center gap-2">
                 <Input
-                  placeholder="Enter DOI / URL / keyword"
+                  placeholder="Enter DOI/ PMID/ URL/ keyword"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSend()}
